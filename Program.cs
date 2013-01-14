@@ -7,7 +7,7 @@ using Evolve.Individuals;
 namespace Evolve
 {
     class Program
-    { 
+    {
         static void Main(string[] args)
         {
             var config = GetEvolutionConfig();
