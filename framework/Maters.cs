@@ -47,7 +47,7 @@ namespace Evolve.Framework
 
             var allParents = HighestFitness.Concat(Random(HighestFitness)).Select(ind =>
             {
-                if (SelectByChance(Config.PopulationConfig.MutationChance / 100.0))
+                if (SelectByChance(Config.PopulationConfig.MutationChance))
                 {
                     return ind.Mutate();
                 }

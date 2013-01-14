@@ -9,7 +9,8 @@ namespace Evolve.Individuals
     {
         private static readonly Random Random = new Random();
 
-        private readonly EvolveConfig Config;
+        private readonly EvolveConfig GlobalConfig;
+        private readonly IndividualConfig IndividualConfig;
 
         private List<double> Current { get; set; }
 
@@ -17,7 +18,7 @@ namespace Evolve.Individuals
         {
             get
             {
-                return Math.Abs(Config.PopulationConfig.IndividualConfig.Target - Sum);
+                return Math.Abs(IndividualConfig.Target - Sum);
             }
         }
 
@@ -29,23 +30,26 @@ namespace Evolve.Individuals
             }
         }
 
-        public Individual(EvolveConfig config)
+        public Individual(EvolveConfig globalConfig, IndividualConfig individualConfig)
         {
-            Config = config;
+            GlobalConfig = globalConfig;
 
-            Current = Enumerable.Range(0, config.PopulationConfig.IndividualConfig.IndividualSize)
+            IndividualConfig = individualConfig;
+
+            Current = Enumerable.Range(0, IndividualConfig.IndividualSize)
                                 .Select(_ => GetValue()).ToList();
         }
 
         private double GetValue()
         {
-            return Math.Round(Random.NextDouble() * (Config.PopulationConfig.IndividualConfig.Max - Config.PopulationConfig.IndividualConfig.Min) 
-                                    + Config.PopulationConfig.IndividualConfig.Min, Config.Precision);
+            return Math.Round(Random.NextDouble() * (IndividualConfig.Max - IndividualConfig.Min) + IndividualConfig.Min, GlobalConfig.Precision);
         }
 
-        public Individual(IEnumerable<double> values, EvolveConfig config)
+        public Individual(IEnumerable<double> values, EvolveConfig globalConfig, IndividualConfig individualConfig)
         {
-            Config = config;
+            GlobalConfig = globalConfig;
+
+            IndividualConfig = individualConfig;
 
             Current = values.ToList();
         }
@@ -54,7 +58,7 @@ namespace Evolve.Individuals
         {
             List<double> mutations = Current;
 
-            for (int i = 0; i < Config.PopulationConfig.IndividualConfig.MutationAmount; i++)
+            for (int i = 0; i < IndividualConfig.MutationAmount; i++)
             {
                 var position = Random.Next(0, mutations.Count());
 
@@ -65,7 +69,7 @@ namespace Evolve.Individuals
                 mutations = start.Concat(new[] {GetValue()}).Concat(end).ToList();
             }
 
-            return new Individual(mutations, Config);
+            return CreateIndividual(mutations);
         }
 
         public IIndividual BreedWith(IIndividual mate)
@@ -77,7 +81,7 @@ namespace Evolve.Individuals
 
             var newGenome = Current.Zip((mate as Individual).Current, (father, mother) => Random.Next(0, 100) > 50 ? father : mother);
 
-            return new Individual(newGenome, Config);
+            return CreateIndividual(newGenome);
         }
 
         public override string ToString()
@@ -86,5 +90,10 @@ namespace Evolve.Individuals
 
             return s.Trim(new[] {' ', ','}) + "]";
         }
+
+        private IIndividual CreateIndividual(IEnumerable<double> genome)
+        {
+            return new Individual(genome, GlobalConfig, IndividualConfig);
+        } 
     }
 }

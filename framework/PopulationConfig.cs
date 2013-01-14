@@ -10,15 +10,13 @@ namespace Evolve.Framework
         public int PopulationSize { get; set; }
 
         /// <summary>
-        /// Integer representing mutation chance (0-100)
+        /// Double representing mutation chance (0.0-1.0)
         /// </summary>
-        public int MutationChance { get; set; }
+        public double MutationChance { get; set; }
 
         /// <summary>
         /// The top 20%
         /// </summary>
         public int SurvivorCount { get { return Convert.ToInt32(0.2 * PopulationSize); } }
-
-        public IndividualConfig IndividualConfig { get; set; }
     }
 }

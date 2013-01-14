@@ -10,22 +10,26 @@ namespace Evolve.Framework
         {
             var population = new Population(Config);
 
-            return Evolve(population);
+            while(ShouldEvolve(population))
+            {
+                population = Evolve(population);
+            }
+
+            return population;
         }
 
         private bool ShouldEvolve(Population population)
         {
-            return Math.Round(population.Grade(), Config.Precision) != Math.Round(0.0, Config.Precision);
+            var grade = population.Grade();
+
+            Console.WriteLine(grade);
+
+            return Math.Round(grade, Config.Precision) != Math.Round(0.0, Config.Precision);
         }
 
         private Population Evolve(Population current)
         {
-            if (!ShouldEvolve(current))
-            {
-                return current;
-            }
-
-            return Evolve(new Population(current.NextGeneration(), Config));
+            return new Population(current.NextGeneration(), Config);
         }
     }
 }
