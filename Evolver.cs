@@ -13,13 +13,7 @@ namespace Evolve
         {
             var population = new Population(Config);
 
-            while (ShouldEvolve(population))
-            {
-                population = Evolve(population);
-                //Console.WriteLine("Fitness {0}", population.Grade());
-            }
-
-            return population;
+            return Evolve(population);
         }
 
         private bool ShouldEvolve(Population population)
@@ -29,7 +23,12 @@ namespace Evolve
 
         private Population Evolve(Population current)
         {
-            return new Population(current.NextGeneration(), Config);
+            if (!ShouldEvolve(current))
+            {
+                return current;
+            }
+
+            return Evolve(new Population(current.NextGeneration(), Config));
         }
     }
 }
