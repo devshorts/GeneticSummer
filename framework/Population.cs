@@ -15,7 +15,7 @@ namespace Evolve.Framework
             Config = config;
 
             Individuals = Enumerable.Range(0, config.PopulationConfig.PopulationSize)
-                                    .Select(_ => IndividualFactory.Instance.CreateIndividual(Config)).ToList();
+                                    .Select(_ => IndividualFactory.Instance.CreateIndividual()).ToList();
         }
 
         public Population(IEnumerable<IIndividual> individuals, EvolveConfig config)

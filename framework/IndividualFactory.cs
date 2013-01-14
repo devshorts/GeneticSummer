@@ -10,10 +10,16 @@ namespace Evolve.Framework
         {
             get { return _instance.Value; }
         }
-
-        public IIndividual CreateIndividual(EvolveConfig config)
+ 
+        public IIndividual CreateIndividual()
         {
-            return new Individual(config);
+            return CreationFunction();
+        }
+
+        private Func<IIndividual> CreationFunction { get; set; }
+        public void RegisterNew(Func<IIndividual> creationFunc)
+        {
+            CreationFunction = creationFunc;
         }
     }
 }

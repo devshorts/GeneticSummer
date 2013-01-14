@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvolveConfig.cs" />
+    <Compile Include="Framework\EvolveConfig.cs" />
     <Compile Include="Framework\Evolver.cs" />
     <Compile Include="Framework\IIndividual.cs" />
     <Compile Include="Individuals\Individual.cs" />
