@@ -16,7 +16,7 @@ namespace Evolve
             while (ShouldEvolve(population))
             {
                 population = Evolve(population);
-                Console.WriteLine("Fitness {0}", population.Grade());
+                //Console.WriteLine("Fitness {0}", population.Grade());
             }
 
             return population;
