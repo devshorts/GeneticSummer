@@ -1,8 +1,7 @@
 GeneticSummer
 =============
 
-Given some population dynamics finds a set of doubles that sum to the target value using a genetic algorithm
-
+Given some population dynamics finds a set of doubles that sum to the target value using a genetic algorithm. Based on a genetic algorithm walkthrough blog post by [lethain.com](http://lethain.com/genetic-algorithms-cool-name-damn-simple/).
 
 Sample Application:
 
