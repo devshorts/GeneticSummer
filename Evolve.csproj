@@ -45,18 +45,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvolveConfig.cs" />
-    <Compile Include="Evolver.cs" />
-    <Compile Include="Individual.cs" />
-    <Compile Include="ListUtil.cs" />
-    <Compile Include="Maters.cs" />
-    <Compile Include="Population.cs" />
-    <Compile Include="PopulationConfig.cs" />
+    <Compile Include="Framework\Evolver.cs" />
+    <Compile Include="Framework\IIndividual.cs" />
+    <Compile Include="Individuals\Individual.cs" />
+    <Compile Include="Framework\IndividualConfig.cs" />
+    <Compile Include="Framework\IndividualFactory.cs" />
+    <Compile Include="Common\ListUtil.cs" />
+    <Compile Include="Framework\Maters.cs" />
+    <Compile Include="Framework\Population.cs" />
+    <Compile Include="Framework\PopulationConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
